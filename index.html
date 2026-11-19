@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-size="m" data-font="hyper" data-motion="full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Small Steps | A calm planner for study and tasks</title>
+<meta name="description" content="Break big tasks into small, concrete steps. Built with autistic, ADHD and other neurodivergent students in mind.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand"><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18h5v-5h5V8h6"/></svg></i>Small Steps</div>
+    <button class="btn ghost" id="openSettings" type="button">Comfort settings</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="lead">Big tasks are hard to start. Tell me what is on your plate and I will turn it into small steps, one at a time, with no pressure.</p>
+
+  <section class="card" aria-labelledby="addH">
+    <h2 id="addH">What do you need to get done?</h2>
+    <form id="addForm" autocomplete="off">
+      <div class="talk" id="talkBox" hidden>
+        <button class="btn say say-big" type="button" id="sayAll" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Talk it through</button>
+        <p class="voice-hint2">Say it all in one go: the task, when it is due, how small the steps should be, and anything that makes it hard. Then say "break it down". For example: "Write my history paper, due next Friday, tiny steps, I cannot get started, break it down."</p>
+      </div>
+      <label class="f" for="title">The task</label>
+      <div class="field"><input type="text" id="title" maxlength="140" placeholder="For example: Write the 5 page paper for ENG 101"><button class="mic" type="button" id="micTitle" aria-pressed="false" aria-label="Say the task out loud" title="Say it out loud" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button></div>
+      <p class="voice-hint" id="voiceHint" hidden>Prefer to talk? Tap the microphone and say it out loud.</p>
+
+      <div class="row">
+        <div>
+          <label class="f" for="due">Due date <span class="opt">(optional)</span></label>
+          <input type="date" id="due">
+          <button class="btn secondary say" type="button" id="sayDate" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Say the date</button>
+        </div>
+        <div>
+          <span class="f" style="display:block;font-weight:700;font-size:0.95rem;margin:16px 0 6px;">How small should the steps be?</span>
+          <div class="seg" id="sizeSeg" role="radiogroup" aria-label="Step size">
+            <input type="radio" name="size" id="sz-tiny" value="tiny"><label for="sz-tiny">Tiny</label>
+            <input type="radio" name="size" id="sz-small" value="small" checked><label for="sz-small">Small</label>
+            <input type="radio" name="size" id="sz-medium" value="medium"><label for="sz-medium">Medium</label>
+          </div>
+          <button class="btn secondary say" type="button" id="saySize" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Say the size</button>
+        </div>
+      </div>
+
+      <label class="f" for="notes">Anything that makes it hard? <span class="opt">(optional)</span></label>
+      <div class="field"><textarea id="notes" maxlength="400" placeholder="For example: the instructions are unclear, I cannot get started, I only have evenings"></textarea><button class="mic top" type="button" id="micNotes" aria-pressed="false" aria-label="Say what makes it hard out loud" title="Say it out loud" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button></div>
+
+      <div class="actions">
+        <button class="btn" type="submit" id="goBtn">Break it down</button>
+        <button class="btn secondary" type="button" id="exampleBtn">Try an example</button>
+      </div>
+      <p class="status" id="addStatus" role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <section class="card" aria-labelledby="todayH">
+    <h2 id="todayH">Today</h2>
+    <p class="sub">Tell me how much time and energy you have. I will pick steps that fit. Nothing more.</p>
+    <div class="row">
+      <div>
+        <label class="f" for="mins">Time I have</label>
+        <select id="mins">
+          <option value="20">20 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="45">45 minutes</option>
+          <option value="60" selected>1 hour</option>
+          <option value="90">1.5 hours</option>
+          <option value="120">2 hours</option>
+          <option value="180">3 hours</option>
+        </select>
+      </div>
+      <div>
+        <span style="display:block;font-weight:700;font-size:0.95rem;margin:16px 0 6px;">My energy right now</span>
+        <div class="seg" role="radiogroup" aria-label="Energy">
+          <input type="radio" name="energy" id="en-low" value="low"><label for="en-low">Low</label>
+          <input type="radio" name="energy" id="en-ok" value="ok" checked><label for="en-ok">Okay</label>
+          <input type="radio" name="energy" id="en-high" value="high"><label for="en-high">Good</label>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn secondary say" type="button" id="sayToday" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Say it</button>
+      <button class="btn" type="button" id="planBtn">Plan my session</button>
+      <button class="btn secondary" type="button" id="startBtn" hidden>Start the first step</button>
+    </div>
+    <p class="status" id="todayStatus" role="status" aria-live="polite"></p>
+    <div id="planOut" aria-live="polite"></div>
+  </section>
+
+  <section class="card" aria-labelledby="tasksH">
+    <h2 id="tasksH">Your tasks</h2>
+    <div id="tasks"></div>
+  </section>
+
+  <footer>
+    <p>Everything you add stays in this browser. If AI help is turned on, only the task text is sent to write the steps.</p>
+    <p>Voice input uses your browser's built-in speech recognition (Chrome, Edge and Safari). Some browsers send the audio to the browser maker's service to turn it into text. Nothing is recorded or kept by this app.</p>
+    <p>Date passed? That is okay. Pick the next small step.</p>
+  </footer>
+</main>
+
+<dialog id="focus" aria-labelledby="focusStep">
+  <div class="dlg">
+    <div class="focus-wrap" id="focusWrap">
+      <p class="focus-meta" id="focusMeta"></p>
+      <h2 class="focus-step" id="focusStep"></h2>
+      <div class="timer">
+        <div class="bar"><i id="bar"></i></div>
+        <div class="time" id="time">0:00</div>
+      </div>
+      <p class="focus-msg" id="focusMsg" role="status" aria-live="polite"></p>
+      <div class="focus-actions">
+        <button class="btn" type="button" id="fDone">Done</button>
+        <button class="btn secondary" type="button" id="fToggle">Start timer</button>
+        <button class="btn secondary" type="button" id="fPlus">5 more minutes</button>
+      </div>
+      <div class="focus-more">
+        <button class="btn secondary say" type="button" id="fSay" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Say a command</button>
+        <button class="btn ghost" type="button" id="fSmaller">This is too big</button>
+        <button class="btn ghost" type="button" id="fSkip">Skip for now</button>
+        <button class="btn ghost" type="button" id="fStop">Stop for now</button>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="settings" aria-labelledby="setH">
+  <div class="dlg">
+    <h2 id="setH">Comfort settings</h2>
+    <p class="sub">Change anything that makes this easier on your senses.</p>
+    <button class="btn secondary say" type="button" id="setSaySettings" aria-pressed="false" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Say a setting</button>
+    <p class="status" id="setStatus" role="status" aria-live="polite"></p>
+
+    <div class="set-group">
+      <span class="lbl">Colors</span>
+      <div class="seg" role="radiogroup" aria-label="Theme">
+        <input type="radio" name="theme" id="th-auto" value="auto"><label for="th-auto">Match my device</label>
+        <input type="radio" name="theme" id="th-light" value="light"><label for="th-light">Light</label>
+        <input type="radio" name="theme" id="th-dark" value="dark"><label for="th-dark">Dark</label>
+      </div>
+    </div>
+    <div class="set-group">
+      <span class="lbl">Text size</span>
+      <div class="seg" role="radiogroup" aria-label="Text size">
+        <input type="radio" name="size2" id="ts-s" value="s"><label for="ts-s">Smaller</label>
+        <input type="radio" name="size2" id="ts-m" value="m"><label for="ts-m">Normal</label>
+        <input type="radio" name="size2" id="ts-l" value="l"><label for="ts-l">Larger</label>
+      </div>
+    </div>
+    <div class="set-group">
+      <span class="lbl">Font</span>
+      <div class="seg" role="radiogroup" aria-label="Font">
+        <input type="radio" name="font" id="fn-hyper" value="hyper"><label for="fn-hyper">Easy to read</label>
+        <input type="radio" name="font" id="fn-system" value="system"><label for="fn-system">Device font</label>
+      </div>
+    </div>
+    <label class="tog"><input type="checkbox" id="setMotion"><span>Calm motion<small>Turns off animations and transitions.</small></span></label>
+    <label class="tog"><input type="checkbox" id="setHide"><span>Hide the countdown numbers<small>Keeps the soft progress bar, removes the ticking clock.</small></span></label>
+    <label class="tog"><input type="checkbox" id="setAI"><span>Use AI to write the steps<small>Falls back to the built-in planner if AI is not available.</small></span></label>
+
+    <div class="dlg-actions">
+      <button class="btn secondary" type="button" id="clearAll">Clear all my data</button>
+      <button class="btn" type="button" id="closeSettings">Done</button>
+    </div>
+  </div>
+</dialog>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
