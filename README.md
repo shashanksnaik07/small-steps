@@ -1,5 +1,9 @@
 # Small Steps
 
+[![CI](https://github.com/shashanksnaik07/small-steps/actions/workflows/ci.yml/badge.svg)](https://github.com/shashanksnaik07/small-steps/actions/workflows/ci.yml)
+
+**Live demo:** [small-steps-autism.vercel.app](https://small-steps-autism.vercel.app/)
+
 A calm planner that turns one big task into small, concrete steps and shows them one at a time. I built it with autistic, ADHD and other neurodivergent students in mind, after taking part in the North America AI Challenge, a hackathon focused on building for those students.
 
 ## What it does
