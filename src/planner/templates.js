@@ -73,13 +73,49 @@ export const TEMPLATES={
     ['Look at an example or your notes for the one that is still stuck',10,'med'],
     ['Check your answers and write your final copy neatly',10,'low']
   ],
-  generic:[
-    ['Write what finished looks like, in one sentence',3,'low'],
-    ['List the parts it is made of',5,'low'],
-    ['Pick the easiest part and do just that',10,'low'],
+  message:[
+    ['Open a blank message and write who it is for and what you need, in one line',3,'low'],
+    ['List the two or three things you need to say. Short is fine.',4,'low'],
+    ['Write a rough first version. It does not need to sound perfect.',8,'med'],
+    ['Read it out loud once and cut anything that is not needed',4,'low'],
+    ['Check the name, the date and anything you are asking for',3,'low'],
+    ['Send it, or save it as a draft and set a time to send it',2,'low']
+  ],
+  chores:[
+    ['Put on music or a podcast, and stand where the mess is',1,'low'],
+    ['Pick up everything that is trash and put it in a bag',5,'low'],
+    ['Gather the things that belong somewhere else into one pile',5,'low'],
     BRK,
-    ['Do the next part',15,'med'],
-    ['Do the part you have been avoiding, for ten minutes only',10,'high'],
-    ['Review it and finish up',10,'low']
+    ['Put away one pile at a time. Stop when the timer ends.',10,'med'],
+    ['Wipe or clear one surface',5,'low'],
+    ['Do one last look and put away anything you see in plain sight',3,'low']
+  ],
+  interview:[
+    ['Open the job post and write down the three skills it asks for most',5,'low'],
+    ['Write one short story from your own work for each of those skills',15,'med'],
+    ['Write your answer to "Tell me about yourself" in four sentences',8,'med'],
+    BRK,
+    ['Say your answers out loud once, slowly',10,'med'],
+    ['Write two questions you want to ask them',5,'low'],
+    ['Set out what you need for the day: where, when, what to wear, what to bring',5,'low']
+  ],
+  application:[
+    ['Open the posting and the form, and note the deadline',3,'low'],
+    ['List what they ask for: documents, questions, links',5,'low'],
+    ['Gather what you already have, like a resume or old answers',8,'low'],
+    ['Write a rough answer for the first question. Do not polish yet.',12,'med'],
+    BRK,
+    ['Fill in the rest of the form',15,'med'],
+    ['Read everything once for typos and missing parts',8,'med'],
+    ['Submit it, or save it and note when you will submit',3,'low']
+  ],
+  generic:[
+    ['Write one sentence about what "finished" looks like for: {t}',3,'low'],
+    ['List the three to five parts it is made of',5,'low'],
+    ['Pick the easiest part and start with only that',10,'low'],
+    BRK,
+    ['Do the next part on your list',15,'med'],
+    ['Do the part you have been putting off, for ten minutes only',10,'high'],
+    ['Look it over, fix one thing, and decide if it is done enough',10,'low']
   ]
 };

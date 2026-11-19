@@ -4,6 +4,10 @@ import { uid } from '../util.js';
 
 export function detectType(t) {
   t = t.toLowerCase();
+  if (/(email|e-mail|message|reply|text back|write to|ask (my|the|a)|contact)/.test(t)) return 'message';
+  if (/(interview)/.test(t)) return 'interview';
+  if (/(apply|application|resume|cover letter|internship|linkedin)/.test(t)) return 'application';
+  if (/(clean|tidy|laundry|dishes|declutter|vacuum|organi[sz]e|groceries|errand)/.test(t)) return 'chores';
   if (/(exam|midterm|quiz|test|final|study|review|revise)/.test(t)) return 'exam';
   if (/(presentation|slides|present|talk|pitch)/.test(t)) return 'presentation';
   if (/(read|chapter|article)/.test(t)) return 'reading';
@@ -16,6 +20,8 @@ export function detectType(t) {
 export function sizeCap(size) {
   return size === 'tiny' ? 5 : size === 'medium' ? 20 : 10;
 }
+
+function lowerFirst(t) { return t.charAt(0).toLowerCase() + t.slice(1); }
 
 function step(text, mins, effort, brk) {
   return { id: uid(), text, mins, effort, brk: !!brk, done: false };
@@ -41,7 +47,7 @@ export function breakdownLocal(title, notes, size) {
     const parts = Math.min(4, Math.ceil(s.mins / cap));
     const each = Math.ceil(s.mins / parts);
     for (let i = 1; i <= parts; i++) {
-      out.push(step(s.text + ' (part ' + i + ' of ' + parts + ')', each, s.effort, false));
+      out.push(step(i === 1 ? s.text : 'Keep going: ' + lowerFirst(s.text), each, s.effort, false));
     }
   });
   return { steps: out, tip: 'This is a starting plan. Change anything that does not fit you.', source: 'builtin' };

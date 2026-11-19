@@ -95,7 +95,7 @@ It works as is, using the built-in planner. To try the AI planner locally, insta
 ## Tests
 
 ```bash
-npm test             # 35 unit tests, no install needed (Node 20 or newer)
+npm test             # 37 unit tests, no install needed (Node 20 or newer)
 npm run check        # syntax check of every JavaScript file
 ```
 

@@ -11,7 +11,11 @@ test('task type is recognised from the title', () => {
   assert.equal(detectType('Debug the Python script'), 'coding');
   assert.equal(detectType('Finish homework 3'), 'problems');
   assert.equal(detectType('Write the 5 page paper'), 'writing');
-  assert.equal(detectType('Clean my room'), 'generic');
+  assert.equal(detectType('Clean my room'), 'chores');
+  assert.equal(detectType('Email my professor about an extension'), 'message');
+  assert.equal(detectType('Prepare for my job interview'), 'interview');
+  assert.equal(detectType('Apply for the summer internship'), 'application');
+  assert.equal(detectType('Plan my sister\'s birthday'), 'generic');
 });
 
 test('every template ends without a trailing break and has valid steps', () => {
@@ -70,4 +74,17 @@ test('AI planner: errors and thin answers reject so the app can fall back', asyn
   await assert.rejects(breakdownAI({}, async () => ({ ok: false, status: 502 })));
   await assert.rejects(breakdownAI({}, ok({ steps: [{ text: 'only one', mins: 3 }] })));
   await assert.rejects(breakdownAI({}, null));
+});
+
+test('split steps read naturally, with no "part 1 of 2" labels', () => {
+  const r = breakdownLocal('Write the 5 page paper', '', 'tiny');
+  assert.ok(!r.steps.some((s) => /part \d of \d/.test(s.text)));
+  assert.ok(r.steps.some((s) => s.text.startsWith('Keep going: ')));
+});
+
+test('every kind of task gets a plan of a sensible length', () => {
+  for (const title of ['Clean my room', 'Email my TA', 'Interview prep', 'Apply for a job', 'Plan a trip']) {
+    const r = breakdownLocal(title, '', 'small');
+    assert.ok(r.steps.length >= 6 && r.steps.length <= 16, title);
+  }
 });
