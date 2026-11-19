@@ -79,7 +79,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 900,
+        max_tokens: 2000,
         system,
         messages: [{ role: 'user', content: user }],
       }),
@@ -92,7 +92,14 @@ export default async function handler(req, res) {
     }
     const data = await r.json();
     const text = (data.content || []).map((b) => b.text || '').join('');
-    const parsed = parseJson(text);
+    let parsed;
+    try {
+      parsed = parseJson(text);
+    } catch (err) {
+      console.error('Could not read AI reply', data.stop_reason, String(text).slice(0, 400));
+      res.status(502).json({ error: 'Could not read the AI reply', stop: data.stop_reason || null });
+      return;
+    }
 
     const steps = (Array.isArray(parsed.steps) ? parsed.steps : [])
       .slice(0, 20)
