@@ -81,6 +81,16 @@ export const TEMPLATES={
     ['Check the name, the date and anything you are asking for',3,'low'],
     ['Send it, or save it as a draft and set a time to send it',2,'low']
   ],
+  shopping:[
+    ['Open your notes or a blank page and write "this week" at the top',2,'low'],
+    ['Write down the meals or things you want to have this week',6,'low'],
+    ['Check what you already have in the fridge and cupboards',5,'low'],
+    BRK,
+    ['Write the list of what is missing, sorted by section of the store',8,'med'],
+    ['Cross off anything you can skip this week',3,'low'],
+    ['Choose when you will go, or set up the order online',3,'low'],
+    ['Go or place the order, then put everything away',20,'med']
+  ],
   chores:[
     ['Put on music or a podcast, and stand where the mess is',1,'low'],
     ['Pick up everything that is trash and put it in a bag',5,'low'],

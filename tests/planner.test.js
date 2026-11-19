@@ -12,6 +12,7 @@ test('task type is recognised from the title', () => {
   assert.equal(detectType('Finish homework 3'), 'problems');
   assert.equal(detectType('Write the 5 page paper'), 'writing');
   assert.equal(detectType('Clean my room'), 'chores');
+  assert.equal(detectType('Plan my groceries for the week'), 'shopping');
   assert.equal(detectType('Email my professor about an extension'), 'message');
   assert.equal(detectType('Prepare for my job interview'), 'interview');
   assert.equal(detectType('Apply for the summer internship'), 'application');
@@ -83,7 +84,7 @@ test('split steps read naturally, with no "part 1 of 2" labels', () => {
 });
 
 test('every kind of task gets a plan of a sensible length', () => {
-  for (const title of ['Clean my room', 'Email my TA', 'Interview prep', 'Apply for a job', 'Plan a trip']) {
+  for (const title of ['Clean my room', 'Buy groceries', 'Email my TA', 'Interview prep', 'Apply for a job', 'Plan a trip']) {
     const r = breakdownLocal(title, '', 'small');
     assert.ok(r.steps.length >= 6 && r.steps.length <= 16, title);
   }

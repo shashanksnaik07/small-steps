@@ -7,7 +7,8 @@ export function detectType(t) {
   if (/(email|e-mail|message|reply|text back|write to|ask (my|the|a)|contact)/.test(t)) return 'message';
   if (/(interview)/.test(t)) return 'interview';
   if (/(apply|application|resume|cover letter|internship|linkedin)/.test(t)) return 'application';
-  if (/(clean|tidy|laundry|dishes|declutter|vacuum|organi[sz]e|groceries|errand)/.test(t)) return 'chores';
+  if (/(grocer|shopping|meal plan|meal prep|errand)/.test(t)) return 'shopping';
+  if (/(clean|tidy|laundry|dishes|declutter|vacuum|organi[sz]e)/.test(t)) return 'chores';
   if (/(exam|midterm|quiz|test|final|study|review|revise)/.test(t)) return 'exam';
   if (/(presentation|slides|present|talk|pitch)/.test(t)) return 'presentation';
   if (/(read|chapter|article)/.test(t)) return 'reading';
