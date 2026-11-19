@@ -85,7 +85,9 @@ export default async function handler(req, res) {
       }),
     });
     if (!r.ok) {
-      res.status(502).json({ error: 'The AI service returned an error' });
+      const detail = typeof r.text === 'function' ? await r.text().catch(() => '') : '';
+      console.error('Anthropic API error', r.status, detail.slice(0, 500));
+      res.status(502).json({ error: 'The AI service returned an error', upstream: r.status });
       return;
     }
     const data = await r.json();
@@ -108,6 +110,7 @@ export default async function handler(req, res) {
     }
     res.status(200).json({ tip: String(parsed.tip || '').slice(0, 200), steps });
   } catch (e) {
+    console.error('breakdown failed', e && e.message);
     res.status(502).json({ error: 'Something went wrong' });
   }
 }
